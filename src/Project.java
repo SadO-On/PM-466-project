@@ -34,7 +34,7 @@ public class Project {
 		return phase;
 	}
 	public void setPhase(List<Phase> phase) {
-		this.phase = phase;
+		this.phase.addAll(phase);
 	}
 
 	public String getProjectStartDate() {

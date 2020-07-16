@@ -25,7 +25,7 @@ public class Phase {
 	}
 
 	public void setDeliverables(List<Deliverable> deliverables) {
-		this.deliverables = deliverables;
+		this.deliverables.addAll(deliverables);
 	}
 
 }
