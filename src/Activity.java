@@ -7,7 +7,6 @@ public class Activity {
 	private ArrayList<Integer> precedence;
 	private ArrayList<Integer> exender;
 	private String employeeName;
-	private boolean viseted;
 	private int total = 0;
 	private String path;
 

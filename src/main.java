@@ -22,7 +22,7 @@ public class main {
                 System.out.println("*-----------------Project Management Program-----------------*");
                 System.out.println("**************Welcome please insert your choice:**************");
                 System.out.println("*To add a new Project, Enter (1)-----------------------------*");
-                System.out.println("*To Exit, Enter (0)------------------------------------------*");
+                System.out.println("*To Exit and print info , Enter (0)------------------------------------------*");
                 System.out.println("**************************************************************");
                 System.out.println("Enter your choice--> ");
                 // Exception if the user enter letter, in case the user is homar
@@ -30,17 +30,17 @@ public class main {
                 if (input == 1) {
                     System.out.println("Please, Enter the project name");
                     String projectName = s.next();
-                    pw.print("Project Name:" + projectName + "\n");
+                    pw.print("Project Name: " + projectName + "\n");
                     System.out.println("Please, Enter the project manger name");
                     String pmName = s.next();
-                    pw.print("Project manger name:" + pmName + "\n");
+                    pw.print("Project manger name: " + pmName + "\n");
                     System.out.println("Please, Enter project start date [dd-mm-yyyy]");
                     String projectdate = s.next();
-                    pw.print("startDate" + projectdate + "\n");
+                    pw.print("startDate: " + projectdate + "\n");
                     System.out.println("Please,  Enter number of phases");
                     // Take loop number
                     int phaseNum = s.nextInt();
-                    pw.print("Number of phases:" + phaseNum + "\n");
+                    pw.print("Number of phases: " + phaseNum + "\n");
                     // Create new project
                     project = new Project(projectName, pmName, projectdate);
                     for (int i = 1; i <= phaseNum; i++) {
@@ -59,39 +59,46 @@ public class main {
                             System.out.println("Please, Enter the name of deliverable" + " " + j);
                             // Create new deliverable
                             deliverable = new Deliverable(s.next());
-                            pw.print("Deliverable" + "" + j + "" + "name:" + deliverable.getName() + "\n");
+                            pw.print("Deliverable " + j + " name: " + deliverable.getName() + "\n");
+                            pw.print("Deliverable " + deliverable.getName() + " activities: " + "\n");
                             // add deliverable to deliverableList
 
-//								Here, add activity here continue the rest of logic
                             System.out.println("Please, Enter the number of activities for deliverable " + j);
                             int activityNum = s.nextInt();
                             for (int r = 1; r <= activityNum; r++) {
-                                System.out.println("enter the name of activity " + r);
+                                System.out.println("Please, Enter the name of activity " + r);
                                 String name = s.next();
-                                System.out.println("enter the duration of activity " + r);
+                                System.out.println("Please, Enter the duration of activity " + r);
                                 int duration = s.nextInt();
-                                System.out.println("enter the resources of activity " + r);
+                                System.out.println("Please, Enter the resources of activity " + r);
                                 String resources = s.next();
-                                System.out.println("enter the number of precedences 0 if none ");
+                                System.out.println("Please, Enter the name of the employee of the activity " + r);
+                                String employee = s.next();
+                                System.out.println("Please, Enter the number of precedences 0 if none ");
+                                pw.print("activity " + r + " ,name: " + name + " ,duration: " + duration + " ,resources: " + resources + " ,employee in charge: " + employee + "\n");
                                 int numpre = s.nextInt();
                                 ArrayList<Integer> precedences = new ArrayList<>();
+                                pw.print("precedences of activity " + r + " are: ");
                                 for (int k = 1; k <= numpre; k++) {
-                                    System.out.println("enter precedence " + k + " of activity " + r);
+                                    System.out.println("Please, Enter precedence " + k + " of activity " + r + " (1 would be the first activity)" + "\n");
                                     int pre = s.nextInt();
+                                    pw.print(" activity " + pre+"\n");
                                     precedences.add(pre - 1);
-                                    System.out.println("33333333333");
-//										deliverable.getActivity().get(pre-1).addExender(r);
                                 }
-                                activity = new Activity(name, duration, resources, "emp");
+                                activity = new Activity(name, duration, resources, employee);
                                 if (numpre != 0) {
                                     activity.setPrecedence(precedences);
+                                } else {
+                                    pw.print("there is no precedence for activity "+ r+"\n");
                                 }
                                 deliverable.addActivity(activity);
                                 deliverable.caloclatecritcalpath();
                             }
-                            System.out.println("hello bitches ");
+                            pw.print("\n");
                             phase.addDeliverable(deliverable);
-                            System.out.println(phase.getDeliverables().get(0).getCritecalpath());
+                            System.out.println("the critical path is of deliverable " + j + " is " + phase.getDeliverables().get(j - 1).getCritecalpath());
+                            pw.print("the critical path of deliverable " + j + " is " + phase.getDeliverables().get(j - 1).getCritecalpath()+"\n");
+
                         }
                         project.addPhase(phase);
 
@@ -107,7 +114,6 @@ public class main {
         } catch (Exception e) {
             System.out.println(e.toString());
         } finally {
-
             s.close();
         }
 
