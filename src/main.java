@@ -74,15 +74,18 @@ public class main {
                                 String resources = s.next();
                                 System.out.println("Please, Enter the name of the employee of the activity " + r);
                                 String employee = s.next();
-                                System.out.println("Please, Enter the number of precedences 0 if none ");
+                                System.out.println("Please, Enter the number of precedences (0 if none) ");
                                 pw.print("activity " + r + " ,name: " + name + " ,duration: " + duration + " ,resources: " + resources + " ,employee in charge: " + employee + "\n");
                                 int numpre = s.nextInt();
                                 ArrayList<Integer> precedences = new ArrayList<>();
                                 pw.print("precedences of activity " + r + " are: ");
                                 for (int k = 1; k <= numpre; k++) {
                                     System.out.println("Please, Enter precedence " + k + " of activity " + r + " (1 would be the first activity)" + "\n");
+                                    
                                     int pre = s.nextInt();
                                     pw.print(" activity " + pre+"\n");
+                                    pw.print("\n");
+
                                     precedences.add(pre - 1);
                                 }
                                 activity = new Activity(name, duration, resources, employee);
@@ -90,6 +93,7 @@ public class main {
                                     activity.setPrecedence(precedences);
                                 } else {
                                     pw.print("there is no precedence for activity "+ r+"\n");
+                                    pw.print("\n");
                                 }
                                 deliverable.addActivity(activity);
                                 deliverable.caloclatecritcalpath();
